@@ -95,13 +95,12 @@ $(document).ready(function () {
 
 function changeSong(index) {
   const song = songs[index];
-  console.log(song);
   $("#player").attr("src", song.url);
   $("#player")[0].play();
 
   $("#current-song-details").html(`
     <div class="cur-song-img">
-        <img src="${song.album.thumbnail300x300}" />
+        <img src="${song.album.thumbnail}" />
       </div>
       <div class="cur-song-name">
       ${song.original_name}
