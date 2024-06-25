@@ -177,8 +177,8 @@ body {
 }
 
 #current-song-details .cur-song-img img {
-  width: 220px;
-  height: 220px;
+  width: 320px;
+  height: 320px;
   border-radius: 9px;
 }
 
@@ -187,7 +187,7 @@ body {
   margin-top: 8px;
   text-align: center;
   font-size: 14px;
-  width: 220px;
+  width: 320px;
 }
 
 #audio-processing {
