@@ -19,7 +19,6 @@ $(document).ready(function () {
     method: "GET",
     dataType: "json",
     success: function (data) {
-      console.log(data);
       $("#full-screen-loader").fadeOut();
     },
     error: function () {
@@ -63,12 +62,23 @@ $(document).ready(function () {
     });
 
     audio.addEventListener("error", function () {
-      loader.hide();
+      $("#audio-processing").text("Failed to load audio");
+      setTimeout(() => {
+        loader.hide();
+        $("#audio-processing").text("Audio Processing");
+      }, 1000);
     });
 
     audio.addEventListener("playing", function () {
       loader.hide();
     });
+
+    audio.addEventListener("ended", handleSongEnded);
+
+    $(".option").click(handleOptionClick);
+
+    $("#no-a-s-s").click(() => $("#already-selected-song").fadeOut());
+    $("#play-a-s-s").click(playAlreadySelectedSong);
   }
 
   function searchSongs(query) {
@@ -91,18 +101,82 @@ $(document).ready(function () {
 
   // Initial render
   renderSongs(songs);
+
+  const savedIndex = storage.get_index();
+  if (savedIndex !== null) showAlreadyPlayingSongPopup();
+
+  initOptions();
 });
 
+const storage = {
+  set_index: (index) => localStorage.setItem("index", index),
+  get_index: () => localStorage.getItem("index"),
+  set_option: (option) => localStorage.setItem("option", option),
+  get_option: () => localStorage.getItem("option"),
+};
+
 function changeSong(index) {
+  storage.set_index(index);
+
   const song = songs[index];
   $("#player").attr("src", song.url);
   $("#player")[0].play();
 
   $("#current-song-details").html(`
     <div class="cur-song-img">
-        <img src="${song.album.thumbnail}" />
+        <img src="${song.album.thumbnail300x300}" />
       </div>
       <div class="cur-song-name">
       ${song.original_name}
       </div>`);
+}
+
+function handleSongEnded() {
+  changeSongBasedOnOption();
+}
+
+function initOptions() {
+  let option = storage.get_option() || $("#option_val").val() || "random";
+  if (storage.get_option() === null) storage.set_option(option);
+
+  $(`#${option}`).addClass("active");
+  $("#option_val").val(option);
+}
+
+function changeOption(option) {
+  storage.set_option(option);
+  $(".option").removeClass("active");
+  $(`#${option}`).addClass("active");
+  $("#option_val").val(option);
+}
+
+function changeSongBasedOnOption() {
+  const option = $("#option_val").val();
+  if (option === "repeat") {
+    $("#player")[0].currentTime = 0;
+    $("#player")[0].play();
+  } else {
+    changeSong(Math.floor(Math.random() * songs.length));
+  }
+}
+
+function handleOptionClick(ele) {
+  const id = ele.target.id;
+  if (id === "next") {
+    changeSongBasedOnOption();
+  } else {
+    changeOption(id);
+  }
+}
+
+function playAlreadySelectedSong() {
+  const savedIndex = storage.get_index();
+  changeSong(savedIndex);
+  $("#already-selected-song").fadeOut();
+}
+
+function showAlreadyPlayingSongPopup() {
+  const savedIndex = storage.get_index();
+  $("#a-s-s-name").text(songs[savedIndex].original_name);
+  $("#already-selected-song").fadeIn();
 }

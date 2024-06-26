@@ -177,8 +177,8 @@ body {
 }
 
 #current-song-details .cur-song-img img {
-  width: 320px;
-  height: 320px;
+  width: 220px;
+  height: 220px;
   border-radius: 9px;
 }
 
@@ -187,7 +187,7 @@ body {
   margin-top: 8px;
   text-align: center;
   font-size: 14px;
-  width: 320px;
+  width: 220px;
 }
 
 #audio-processing {
@@ -211,4 +211,78 @@ body {
   align-items: center;
   background-color: #000000;
   color: white;
+}
+
+#options {
+  color: white;
+  position: absolute;
+  top: 4px;
+  left: 30px;
+  cursor: pointer;
+}
+
+#option-hover {
+  background-color: #555;
+  padding: 2px 8px;
+  border-radius: 9px;
+  font-size: 11px;
+}
+
+#options:hover .option {
+  opacity: 1;
+}
+
+.option {
+  opacity: 0;
+  background-color: rgba(94, 94, 255, 0.415);
+  padding: 2px 8px;
+  border-radius: 9px;
+  font-size: 11px;
+  transition: opacity 300ms ease;
+}
+
+.option.active {
+  background-color: rgb(94, 94, 255);
+}
+
+#already-selected-song {
+  color: white;
+  display: flex;
+  position: absolute;
+  z-index: 1000;
+  background-color: #000000;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+#already-selected-song h3,
+#already-selected-song p {
+  text-align: center;
+}
+
+.a-s-s-options {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#no-a-s-s {
+  margin-right: 8px;
+  border: 1px solid #555;
+  padding: 4px 8px;
+  border-radius: 9px;
+}
+
+#play-a-s-s {
+  border: 1px solid #0048ff;
+  padding: 4px 8px;
+  border-radius: 9px;
+}
+
+#play-a-s-s:hover {
+  color: rgb(175, 175, 175);
 }

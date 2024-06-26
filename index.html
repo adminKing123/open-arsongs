@@ -26,12 +26,34 @@
       </div>
     </div>
 
+    <div id="options">
+      <input type="hidden" name="option_val" id="option_val" value="random" />
+      <span id="option-hover">Options</span>
+      <span id="repeat" class="option">Repeat</span>
+      <span id="random" class="option">Random</span>
+      <span id="next" class="option">Next</span>
+    </div>
+
     <div id="visualizer-container"></div>
 
     <div id="current-song-details"></div>
 
     <div class="audio-container">
       <audio id="player" controls></audio>
+    </div>
+
+    <div id="already-selected-song">
+      <div class="a-s-s-popup">
+        <div>
+          <h3 id="a-s-s-name">In Dino</h3>
+          <p>Would you like to play it again?</p>
+        </div>
+        <div class="a-s-s-options">
+          <div id="no-a-s-s">No</div>
+          <div id="play-a-s-s">Play</div>
+        </div>
+      </div>
+      <div></div>
     </div>
 
     <div id="audio-processing">Audio Processing</div>
