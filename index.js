@@ -47,38 +47,6 @@ $(document).ready(function () {
         `);
       $("#songs-lister").append(li);
     });
-
-    $("#player")[0].crossOrigin = "anonymous";
-
-    var audio = document.getElementById("player");
-    var loader = $("#audio-processing");
-
-    audio.addEventListener("loadstart", function () {
-      loader.show();
-    });
-
-    audio.addEventListener("canplaythrough", function () {
-      loader.hide();
-    });
-
-    audio.addEventListener("error", function () {
-      $("#audio-processing").text("Failed to load audio");
-      setTimeout(() => {
-        loader.hide();
-        $("#audio-processing").text("Audio Processing");
-      }, 1000);
-    });
-
-    audio.addEventListener("playing", function () {
-      loader.hide();
-    });
-
-    audio.addEventListener("ended", handleSongEnded);
-
-    $(".option").click(handleOptionClick);
-
-    $("#no-a-s-s").click(() => $("#already-selected-song").fadeOut());
-    $("#play-a-s-s").click(playAlreadySelectedSong);
   }
 
   function searchSongs(query) {
@@ -106,6 +74,38 @@ $(document).ready(function () {
   if (savedIndex !== null) showAlreadyPlayingSongPopup();
 
   initOptions();
+
+  $("#player")[0].crossOrigin = "anonymous";
+
+  var audio = document.getElementById("player");
+  var loader = $("#audio-processing");
+
+  audio.addEventListener("loadstart", function () {
+    loader.show();
+  });
+
+  audio.addEventListener("canplaythrough", function () {
+    loader.hide();
+  });
+
+  audio.addEventListener("error", function () {
+    $("#audio-processing").text("Failed to load audio");
+    setTimeout(() => {
+      loader.hide();
+      $("#audio-processing").text("Audio Processing");
+    }, 1000);
+  });
+
+  audio.addEventListener("playing", function () {
+    loader.hide();
+  });
+
+  audio.addEventListener("ended", handleSongEnded);
+
+  $(".option").click(handleOptionClick);
+
+  $("#no-a-s-s").click(() => $("#already-selected-song").fadeOut());
+  $("#play-a-s-s").click(playAlreadySelectedSong);
 });
 
 const storage = {
