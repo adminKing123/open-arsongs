@@ -3,30 +3,23 @@ const audioMotion = new AudioMotionAnalyzer(
   document.getElementById("visualizer-container"),
   {
     source: document.getElementById("player"),
-    source: document.getElementById("player"),
-    mode: 5,
-    fftSize: 8192,
-    minFreq: 20,
-    maxFreq: 22000,
-    barSpace: 0.1,
+    mode: 1,
     ledBars: true,
     showBgColor: true,
     overlay: true,
-    channelLayout: "single",
-    radial: false,
-    reflexRatio: 0,
-    linearAmplitude: true,
-    linearBoost: 1.8,
-    ledSpaceRatio: 0.2,
     colorMode: "gradient",
     gradient: "rainbow",
-    lumiBars: false,
     showScaleX: false,
-    showPeaks: false,
-    smoothing: 0.7,
-    fillAlpha: 1,
-    bgAlpha: 0.7,
-    useCanvas: true,
-    frequencyScale: "bark",
+    showPeaks: true,
+    onCanvasDraw: (instance) => {
+      const lowEnergy = instance.getEnergy("bass");
+      const midEnergy = instance.getEnergy("midrange");
+      const highEnergy = instance.getEnergy("treble");
+
+      const r = Math.round(lowEnergy * 255);
+      const g = Math.round(midEnergy * 255);
+      const b = Math.round(highEnergy * 255);
+      $("#aaah").css("background-color", `rgb(${r}, ${g}, ${b})`);
+    },
   }
 );
