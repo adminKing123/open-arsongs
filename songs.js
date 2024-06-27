@@ -170,7 +170,7 @@ const songs = [
   {
       "id": 848,
       "title": "HybTeory - Linkin Park - In the End.mp3",
-      "url": "https://github.com/adminKing123/arsongs-src/raw/main/songs-file/HybTeory%20-%20Linkin%20Park%20-%20In%20the%20End.mp3",
+      "url": "https://ionized-songs-book.glitch.me/songs-file/HybTeory%20-%20Linkin%20Park%20-%20In%20the%20End.mp3",
       "original_name": "Linkin Park - In the End",
       "album": {
           "id": 545,
@@ -1895,7 +1895,7 @@ const songs = [
   {
       "id": 783,
       "title": "FREDM - Don't Matter.mp3",
-      "url": "https://github.com/adminKing123/arsongs-src/raw/main/songs-file/FREDM%20-%20Don't%20Matter.mp3",
+      "url": "https://ionized-songs-book.glitch.me/songs-file/FREDM%20-%20Don't%20Matter.mp3",
       "original_name": "Don't Matter",
       "album": {
           "id": 497,
@@ -1922,7 +1922,7 @@ const songs = [
   {
       "id": 782,
       "title": "FREDM - Beautiful.mp3",
-      "url": "https://github.com/adminKing123/arsongs-src/raw/main/songs-file/FREDM%20-%20Beautiful.mp3",
+      "url": "https://ionized-songs-book.glitch.me/songs-file/FREDM%20-%20Beautiful.mp3",
       "original_name": "Beautiful",
       "album": {
           "id": 497,
@@ -1949,7 +1949,7 @@ const songs = [
   {
       "id": 781,
       "title": "DY - Con Calma.mp3",
-      "url": "https://github.com/adminKing123/arsongs-src/raw/main/songs-file/DY%20-%20Con%20Calma.mp3",
+      "url": "https://ionized-songs-book.glitch.me/songs-file/DY%20-%20Con%20Calma.mp3",
       "original_name": "Con Calma",
       "album": {
           "id": 86,
@@ -2936,7 +2936,7 @@ const songs = [
   {
       "id": 748,
       "title": "RSPTN - Rasputin.mp3",
-      "url": "https://github.com/adminKing123/arsongs-src/raw/main/songs-file/RSPTN%20-%20Rasputin.mp3.mp3",
+      "url": "https://ionized-songs-book.glitch.me/songs-file/RSPTN%20-%20Rasputin.mp3.mp3",
       "original_name": "Rasputin",
       "album": {
           "id": 481,
