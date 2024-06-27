@@ -13,9 +13,17 @@
 </li>
 */
 
+const API_URI = "https://ionized-songs-book.glitch.me";
+
+const API_ENDPOINTS = {
+  status: () => `${API_URI}/status`,
+  song: (path) => `${API_URI}/songs/${path}`,
+  image: (path) => `${API_URI}/images/${path}`,
+};
+
 $(document).ready(function () {
   $.ajax({
-    url: "https://ionized-songs-book.glitch.me/status",
+    url: API_ENDPOINTS.status(),
     method: "GET",
     dataType: "json",
     success: function (data) {
@@ -119,12 +127,12 @@ function changeSong(index) {
   storage.set_index(index);
 
   const song = songs[index];
-  $("#player").attr("src", song.url);
+  $("#player").attr("src", API_ENDPOINTS.song(song.url));
   $("#player")[0].play();
 
   $("#current-song-details").html(`
     <div class="cur-song-img">
-        <img src="${song.album.thumbnail}" />
+        <img src="${API_ENDPOINTS.image(song.album.thumbnail)}" />
       </div>
       <div class="cur-song-name">
       ${song.original_name}
