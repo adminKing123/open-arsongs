@@ -13,8 +13,8 @@
 </li>
 */
 
-// const API_URI = "https://ionized-songs-book.glitch.me";
-const API_URI = "http://localhost:3000";
+const API_URI = "https://ionized-songs-book.glitch.me";
+// const API_URI = "http://localhost:3000";
 
 const API_ENDPOINTS = {
   status: () => `${API_URI}/status`,
@@ -79,7 +79,7 @@ $(document).ready(function () {
         $("#list-songs-loader").hide();
       },
     });
-  }, 500);
+  }, 200);
 
   $("#search-input").on("input", function () {
     const query = $(this).val();
