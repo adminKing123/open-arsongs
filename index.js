@@ -34,8 +34,13 @@ $(document).ready(function () {
     },
     error: function (err) {
       if (err?.status === 403) {
-        $("#full-screen-loader").text(
-          "You are not allowed to access this page."
+        $("#full-screen-loader").html(
+          `
+          <div style="text-align: center;">
+            <p>You are not allowed to access this page.</p>
+            <p><a style="color: green;" href="./addip.html">Please visit add IP</a></p>
+          <div>
+          `
         );
         $("#full-screen-loader").css("color", "red");
       } else {

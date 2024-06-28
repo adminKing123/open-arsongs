@@ -1,0 +1,150 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add IP (Open Songs)</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
+  <style>
+    /* ip-adder */
+    body {
+      background-color: #000000;
+    }
+    #ip-adder {
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      z-index: 10000;
+    }
+
+    .ip-adder-con input {
+      display: block;
+      margin-bottom: 8px;
+      width: 100%;
+      outline: none;
+      border: 1px solid rgb(44, 44, 44);
+      padding: 8px 12px;
+      background-color: #000000;
+      border-radius: 9px;
+    }
+
+    #adder-submit {
+      cursor: pointer;
+      width: 100%;
+      padding: 8px 12px;
+      outline: none;
+      border: none;
+      border-radius: 9px;
+      transition: background-color 300ms ease;
+    }
+
+    #adder-submit:hover {
+      background-color: #afafaf;
+    }
+
+    #reload-adder {
+      display: none;
+      margin-top: 8px;
+      cursor: pointer;
+      width: 100%;
+      padding: 8px 12px;
+      outline: none;
+      border: none;
+      border-radius: 9px;
+      background-color: #fdf4a1;
+      font-weight: bold;
+      color: black;
+    }
+
+    .not-allow-error {
+      color: red;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    input {
+      color: white;
+    }
+
+    .success {
+      margin-bottom: 8px;
+      color: green;
+    }
+
+    .error {
+      margin-bottom: 8px;
+      color: red;
+    }
+  </style>
+  <body>
+    <div id="ip-adder">
+      <form>
+        <div class="ip-adder-con">
+          <div class="not-allow-error">
+            If you are not allowed to access this page.
+          </div>
+          <div class="not-allow-error">
+            You can add IP if you know passKey to get access...
+          </div>
+          <input
+            class="adder-input"
+            placeholder="Enter Passkey"
+            id="passKey"
+            type="password"
+            autocomplete="off"
+          />
+          <input class="adder-input" placeholder="Enter Name" id="name" />
+          <input class="adder-input" placeholder="Enter IP" id="ip" />
+          <div id="adder-log"></div>
+          <button id="adder-submit" type="button">Add IP</button>
+          <button id="reload-adder" type="button">Reload</button>
+        </div>
+      </form>
+    </div>
+    <script>
+      const API_URI = "https://ionized-songs-book.glitch.me";
+      $("#adder-submit").click(() => {
+        const passKey = $("#passKey").val();
+        const name = $("#name").val();
+        const ip = $("#ip").val();
+
+        if (passKey && name && ip) {
+          $("#adder-submit").text("Adding Please Wait");
+          $.ajax({
+            url: `${API_URI}/addIp`,
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+              passKey: passKey,
+              name: name,
+              ip: ip,
+            }),
+            success: function (response) {
+              $("#adder-submit").text("Add IP");
+              $("#adder-log").addClass("success");
+              $("#adder-log").text("IP added successfully");
+              $("#reload-adder").show();
+            },
+            error: function (xhr, status, error) {
+              $("#adder-submit").text("Add IP");
+              $("#adder-log").addClass("error");
+              $("#adder-log").text(xhr.responseJSON.message);
+            },
+          });
+        } else {
+          alert("All fields are required!");
+        }
+      });
+
+      $("#reload-adder").click(() => {
+        window.location = window.location.origin;
+      });
+    </script>
+  </body>
+</html>
