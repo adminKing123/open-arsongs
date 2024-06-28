@@ -296,3 +296,21 @@ body {
   height: 100vh;
   opacity: 0.2;
 }
+
+#list-songs-loader,
+#list-songs-not-found {
+  color: white;
+  font-size: 13px;
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#next {
+  transition: background-color 300ms ease;
+}
+
+#next.loading {
+  background-color: green;
+}

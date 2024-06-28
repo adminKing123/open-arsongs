@@ -13,73 +13,86 @@
 </li>
 */
 
-const API_URI = "https://ionized-songs-book.glitch.me";
+// const API_URI = "https://ionized-songs-book.glitch.me";
+const API_URI = "http://localhost:3000";
 
 const API_ENDPOINTS = {
   status: () => `${API_URI}/status`,
   song: (path) => `${API_URI}/songs/${path}`,
   image: (path) => `${API_URI}/images/${path}`,
+  list_songs: (query = "") => `${API_URI}/list/songs?query=${query}`,
+  get_song: (index) => `${API_URI}/get/song/${index}`,
+};
+
+const debounce = (func, delay) => {
+  let timeoutId;
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func(...args), delay);
+  };
 };
 
 $(document).ready(function () {
+  $("#list-songs-loader").hide();
+  $("#list-songs-not-found").hide();
+  $("#songs-lister").hide();
+
+  const savedIndex = storage.get_index();
+
   $.ajax({
     url: API_ENDPOINTS.status(),
     method: "GET",
     dataType: "json",
     success: function (data) {
-      $("#full-screen-loader").fadeOut();
+      total_songs = data.songs_length;
+      if (savedIndex === null || savedIndex === undefined)
+        $("#full-screen-loader").fadeOut();
     },
     error: function () {
       alert("Some thing went wrong...");
     },
   });
 
-  function renderSongs(songsToRender) {
-    $("#songs-lister").empty();
-    $.each(songsToRender, function (_, songObj) {
-      const song = songObj;
-      const li = $(
-        `<li data-index=${songObj.index} onclick="changeSong(${songObj.index})">`
-      ).addClass("song").html(`
-          <div class="song-details">
-            <div class="song-name">${song.original_name}</div>
-            <div class="song-album">
-              ${song.album.title} <span class="song-year">(${
-        song.album.year
-      })</span>
-            </div>
-            <div class="song-artists">${song.artists
-              .map((artist) => artist.name)
-              .join(", ")}</div>
-          </div>
-        `);
-      $("#songs-lister").append(li);
-    });
-  }
+  const searchSongs = debounce((query) => {
+    $("#list-songs-not-found").hide();
+    $("#songs-lister").hide();
+    $("#list-songs-loader").show();
+    screen_rendered_songs = {};
+    $.ajax({
+      url: API_ENDPOINTS.list_songs(query),
+      method: "GET",
+      dataType: "json",
+      success: function (data) {
+        renderSongs(data.songs);
 
-  function searchSongs(query) {
-    return songs.filter(function (songObj) {
-      const song = songObj;
-      const searchString = `${song.original_name} ${song.album.title} ${
-        song.album.year
-      } ${song.genre.name} ${song.artists
-        .map((artist) => artist.name)
-        .join(" ")}`.toLowerCase();
-      return searchString.includes(query.toLowerCase());
+        data.songs.forEach((song) => {
+          screen_rendered_songs[song.index] = song;
+        });
+
+        $("#list-songs-loader").hide();
+        $("#list-songs-not-found").hide();
+        $("#songs-lister").show();
+      },
+      error: function (err) {
+        $("#list-songs-not-found").show();
+        $("#songs-lister").hide();
+        $("#list-songs-loader").hide();
+      },
     });
-  }
+  }, 500);
 
   $("#search-input").on("input", function () {
     const query = $(this).val();
-    const filteredSongs = searchSongs(query);
-    renderSongs(filteredSongs);
+    searchSongs(query);
+    // const filteredSongs = searchSongs(query);
+    // renderSongs(filteredSongs);
   });
 
   // Initial render
-  renderSongs(songs);
+  initialize();
 
-  const savedIndex = storage.get_index();
-  if (savedIndex !== null) showAlreadyPlayingSongPopup();
+  if (savedIndex !== null && savedIndex !== undefined)
+    showAlreadyPlayingSongPopup();
 
   initOptions();
 
@@ -123,10 +136,8 @@ const storage = {
   get_option: () => localStorage.getItem("option"),
 };
 
-function changeSong(index) {
+function changeSong(song, index) {
   storage.set_index(index);
-
-  const song = songs[index];
   $("#player").attr("src", API_ENDPOINTS.song(song.url));
   $("#player")[0].play();
 
@@ -145,7 +156,8 @@ function handleSongEnded() {
 
 function initOptions() {
   let option = storage.get_option() || $("#option_val").val() || "random";
-  if (storage.get_option() === null) storage.set_option(option);
+  if (storage.get_option() === null || storage.get_option() === undefined)
+    storage.set_option(option);
 
   $(`#${option}`).addClass("active");
   $("#option_val").val(option);
@@ -164,7 +176,20 @@ function changeSongBasedOnOption() {
     $("#player")[0].currentTime = 0;
     $("#player")[0].play();
   } else {
-    changeSong(Math.floor(Math.random() * songs.length));
+    $("#next").addClass("loading");
+    $.ajax({
+      url: API_ENDPOINTS.get_song(Math.floor(Math.random() * total_songs)),
+      method: "GET",
+      dataType: "json",
+      success: function (data) {
+        let song = data.song;
+        changeSong(song, song.index);
+        $("#next").removeClass("loading");
+      },
+      error: function () {
+        $("#next").removeClass("loading");
+      },
+    });
   }
 }
 
@@ -178,13 +203,81 @@ function handleOptionClick(ele) {
 }
 
 function playAlreadySelectedSong() {
-  const savedIndex = storage.get_index();
-  changeSong(savedIndex);
+  changeSong(alreadySelectedSong, alreadySelectedSong.index);
   $("#already-selected-song").fadeOut();
 }
 
 function showAlreadyPlayingSongPopup() {
   const savedIndex = storage.get_index();
-  $("#a-s-s-name").text(songs[savedIndex].original_name);
-  $("#already-selected-song").fadeIn();
+
+  $.ajax({
+    url: API_ENDPOINTS.get_song(savedIndex),
+    method: "GET",
+    dataType: "json",
+    success: function (data) {
+      alreadySelectedSong = data.song;
+      $("#full-screen-loader").fadeOut();
+      $("#a-s-s-name").text(alreadySelectedSong.original_name);
+      $("#already-selected-song").fadeIn();
+    },
+    error: function (err) {
+      $("#full-screen-loader").fadeOut();
+    },
+  });
+}
+
+function initialize() {
+  $("#list-songs-not-found").hide();
+  $("#songs-lister").hide();
+  $("#list-songs-loader").show();
+  screen_rendered_songs = {};
+  $.ajax({
+    url: API_ENDPOINTS.list_songs(),
+    method: "GET",
+    dataType: "json",
+    success: function (data) {
+      renderSongs(data.songs);
+
+      data.songs.forEach((song) => {
+        screen_rendered_songs[song.index] = song;
+      });
+
+      $("#list-songs-loader").hide();
+      $("#list-songs-not-found").hide();
+      $("#songs-lister").show();
+    },
+    error: function (err) {
+      $("#list-songs-not-found").show();
+      $("#songs-lister").hide();
+      $("#list-songs-loader").hide();
+    },
+  });
+}
+
+function renderSongs(songsToRender) {
+  $("#songs-lister").empty();
+  $.each(songsToRender, function (_, songObj) {
+    const song = songObj;
+    const li = $(
+      `<li data-index=${songObj.index} onclick="setSong(${songObj.index})">`
+    ).addClass("song").html(`
+        <div class="song-details">
+          <div class="song-name">${song.original_name}</div>
+          <div class="song-album">
+            ${song.album.title} <span class="song-year">(${
+      song.album.year
+    })</span>
+          </div>
+          <div class="song-artists">${song.artists
+            .map((artist) => artist.name)
+            .join(", ")}</div>
+        </div>
+      `);
+    $("#songs-lister").append(li);
+  });
+}
+
+function setSong(index) {
+  const song = screen_rendered_songs[index];
+  changeSong(song, index);
 }
