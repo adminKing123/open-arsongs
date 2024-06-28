@@ -34,7 +34,7 @@ $(document).ready(function () {
     },
     error: function (err) {
       if (err?.status === 403) {
-        $("#full-screen-loader").html(
+        $("#full-screen-loader-2").html(
           `
           <div style="text-align: center;">
             <p>You are not allowed to access this page.</p>
@@ -42,7 +42,8 @@ $(document).ready(function () {
           <div>
           `
         );
-        $("#full-screen-loader").css("color", "red");
+        $("#full-screen-loader-2").css("color", "red");
+        $("#full-screen-loader-2").css("display", "flex");
       } else {
         console.log(err);
         alert("Some thing went wrong...");

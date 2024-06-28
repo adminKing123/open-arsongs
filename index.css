@@ -213,6 +213,20 @@ body {
   color: white;
 }
 
+#full-screen-loader-2 {
+  z-index: 2000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+  color: white;
+}
+
 #options {
   color: white;
   position: absolute;
