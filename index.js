@@ -1,20 +1,4 @@
-/*
-<li class="song">
-  <div class="song-img-container">
-    <img src="album_img" />
-  </div>
-  <div class="song-details">
-    <div class="song-name">song_name</div>
-    <div class="song-album">
-      album_name <span class="song-year">(album_year)</span>
-    </div>
-    <div class="song-artists">Artists_names comma seperated</div>
-  </div>
-</li>
-*/
-
 const API_URI = "https://ionized-songs-book.glitch.me";
-// const API_URI = "http://localhost:3000";
 
 const API_ENDPOINTS = {
   status: () => `${API_URI}/status`,
@@ -48,8 +32,16 @@ $(document).ready(function () {
       if (savedIndex === null || savedIndex === undefined)
         $("#full-screen-loader").fadeOut();
     },
-    error: function () {
-      alert("Some thing went wrong...");
+    error: function (err) {
+      if (err?.status === 403) {
+        $("#full-screen-loader").text(
+          "You are not allowed to access this page."
+        );
+        $("#full-screen-loader").css("color", "red");
+      } else {
+        console.log(err);
+        alert("Some thing went wrong...");
+      }
     },
   });
 
@@ -84,11 +76,8 @@ $(document).ready(function () {
   $("#search-input").on("input", function () {
     const query = $(this).val();
     searchSongs(query);
-    // const filteredSongs = searchSongs(query);
-    // renderSongs(filteredSongs);
   });
 
-  // Initial render
   initialize();
 
   if (savedIndex !== null && savedIndex !== undefined)
@@ -281,3 +270,18 @@ function setSong(index) {
   const song = screen_rendered_songs[index];
   changeSong(song, index);
 }
+
+/*
+<li class="song">
+  <div class="song-img-container">
+    <img src="album_img" />
+  </div>
+  <div class="song-details">
+    <div class="song-name">song_name</div>
+    <div class="song-album">
+      album_name <span class="song-year">(album_year)</span>
+    </div>
+    <div class="song-artists">Artists_names comma seperated</div>
+  </div>
+</li>
+*/
