@@ -20,7 +20,6 @@
       width: 100vw;
       height: 100vh;
       background-color: black;
-      z-index: 10000;
     }
 
     .ip-adder-con input {
@@ -81,8 +80,23 @@
       margin-bottom: 8px;
       color: red;
     }
+
+    #full-screen-loader {
+      color: white;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1000;
+      background-color: #000000;
+    }
   </style>
   <body>
+    <div id="full-screen-loader">Checking your IP...</div>
     <div id="ip-adder">
       <form>
         <div class="ip-adder-con">
@@ -143,7 +157,23 @@
       });
 
       $("#reload-adder").click(() => {
-        window.location = window.location.origin + '/open-arsongs/';
+        window.location = window.location.origin + "/open-arsongs/";
+      });
+
+      $(document).ready(function () {
+        $.ajax({
+          url: `${API_URI}/get-ip`,
+          method: "GET",
+          contentType: "application/json",
+          success: function (response) {
+            $("#ip").val(response.ip);
+            $("#full-screen-loader").hide();
+          },
+          error: function (xhr, status, error) {
+            console.log(error);
+            alert("something went wrong");
+          },
+        });
       });
     </script>
   </body>
