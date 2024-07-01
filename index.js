@@ -1,5 +1,5 @@
-// const API_URI = "https://ionized-songs-book.glitch.me";
-const API_URI = "https://open-songs-api.onrender.com";
+const API_URI = "https://ionized-songs-book.glitch.me";
+// const API_URI = "https://open-songs-api.onrender.com";
 
 const API_ENDPOINTS = {
   status: () => `${API_URI}/status`,
