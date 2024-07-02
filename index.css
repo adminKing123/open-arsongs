@@ -328,3 +328,29 @@ body {
 #next.loading {
   background-color: green;
 }
+
+/* lyrics */
+#lyric-display {
+  pointer-events: none;
+  width: 100vw;
+  font-size: 18px;
+  margin: 60px 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.lyric-line {
+  margin: 5px 0;
+}
+
+.lyric-line.current {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.lyric-line.adjacent {
+  color: #666;
+}

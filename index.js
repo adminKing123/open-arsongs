@@ -1,3 +1,4 @@
+// const API_URI = "http://localhost:3000";
 const API_URI = "https://ionized-songs-book.glitch.me";
 // const API_URI = "https://open-songs-api.onrender.com";
 
@@ -5,6 +6,7 @@ const API_ENDPOINTS = {
   status: () => `${API_URI}/status`,
   song: (path) => `${API_URI}/songs/${path}`,
   image: (path) => `${API_URI}/images/${path}`,
+  lyrics: (path) => `${API_URI}/lyrics/${path}`,
   list_songs: (query = "") => `${API_URI}/list/songs?query=${query}`,
   get_song: (index) => `${API_URI}/get/song/${index}`,
 };
@@ -133,6 +135,7 @@ const storage = {
 };
 
 function changeSong(song, index) {
+  loadLyrics(song);
   storage.set_index(index);
   $("#player").attr("src", API_ENDPOINTS.song(song.url));
   $("#player")[0].play();
@@ -147,6 +150,7 @@ function changeSong(song, index) {
 }
 
 function handleSongEnded() {
+  $(".lyric-line").text("");
   changeSongBasedOnOption();
 }
 
@@ -276,6 +280,84 @@ function renderSongs(songsToRender) {
 function setSong(index) {
   const song = screen_rendered_songs[index];
   changeSong(song, index);
+}
+
+const update = () => {
+  const audio = document.getElementById("player");
+  if (lyrics) {
+    let currentLyricIndex = -1;
+    const currentTime = audio.currentTime;
+
+    let newIndex = currentLyricIndex;
+    while (
+      newIndex < lyrics.length - 1 &&
+      lyrics[newIndex + 1].time <= currentTime
+    ) {
+      newIndex++;
+    }
+
+    if (newIndex !== currentLyricIndex) {
+      currentLyricIndex = newIndex;
+      displayLyrics(lyrics, currentLyricIndex);
+    }
+  }
+};
+
+document.getElementById("player").addEventListener("timeupdate", update);
+
+function displayLyrics(lyrics, currentIndex) {
+  const prevLine = document.getElementById("prev-line");
+  const currentLine = document.getElementById("current-line");
+  const nextLine = document.getElementById("next-line");
+
+  prevLine.textContent = currentIndex > 0 ? lyrics[currentIndex - 1].text : "";
+  currentLine.textContent = lyrics[currentIndex].text;
+  nextLine.textContent =
+    currentIndex < lyrics.length - 1 ? lyrics[currentIndex + 1].text : "";
+
+  prevLine.className = "lyric-line adjacent";
+  currentLine.className = "lyric-line current";
+  nextLine.className = "lyric-line adjacent";
+  void currentLine.offsetWidth;
+}
+
+function parseLrc(lrcContent) {
+  const lines = lrcContent.split("\n");
+  const timeRegex = /\[(\d{2}):(\d{2})\.(\d{2,3})\]/;
+  const lyrics = [];
+
+  lines.forEach((line) => {
+    const match = timeRegex.exec(line);
+    if (match) {
+      const minutes = parseInt(match[1]);
+      const seconds = parseInt(match[2]);
+      const milliseconds = parseInt(match[3]);
+      const time = minutes * 60 + seconds + milliseconds / 1000;
+      const text = line.replace(timeRegex, "").trim();
+      lyrics.push({ time, text });
+    }
+  });
+
+  return lyrics;
+}
+
+function loadLyrics(song) {
+  $(".lyric-line").text("");
+  lyrics = null;
+  if (song.lyrics) {
+    $.ajax({
+      url: API_ENDPOINTS.lyrics(song.lyrics),
+      method: "GET",
+      success: function (data) {
+        lyrics = parseLrc(data);
+      },
+      error: function (err) {
+        console.log(err);
+        lyrics = null;
+        $(".lyric-line").text("");
+      },
+    });
+  }
 }
 
 /*
