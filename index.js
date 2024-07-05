@@ -147,6 +147,8 @@ function changeSong(song, index) {
       <div class="cur-song-name">
       ${song.original_name}
       </div>`);
+
+  document.title = song.original_name;
 }
 
 function handleSongEnded() {
