@@ -20,6 +20,7 @@ const debounce = (func, delay) => {
 };
 
 $(document).ready(function () {
+  $("#player").prop("volume", .1);
   $("#list-songs-loader").hide();
   $("#list-songs-not-found").hide();
   $("#songs-lister").hide();
