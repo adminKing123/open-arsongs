@@ -20,7 +20,11 @@ const audioMotion = new AudioMotionAnalyzer(
       const g = Math.round(midEnergy * 255);
       const b = Math.round(highEnergy * 255);
       $("#aaah").css("background-color", `rgb(${r}, ${g}, ${b})`);
-      $(".cur-song-img").css("background-color", `rgb(${r}, ${g}, ${b})`);
+
+      // Create a rocking shadow effect
+      const offsetX = Math.sin(Date.now() / 200) * 5; // Adjust the divisor to change speed
+      const offsetY = Math.cos(Date.now() / 200) * 5; // Adjust the multiplier to change intensity
+      $(".cur-song-img").css("box-shadow", `${offsetX}px ${offsetY}px 10px rgba(${r}, ${g}, ${b}, 0.7)`);
     },
   }
 );
