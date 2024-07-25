@@ -173,7 +173,8 @@ body {
 
 #current-song-details .cur-song-img {
   background-color: #000000;
-  border-radius: 9px;
+  border-radius: 16px;
+  padding: 10px;
 }
 
 #current-song-details .cur-song-img img {
