@@ -26,20 +26,15 @@ const audioMotion = new AudioMotionAnalyzer(
       // const offsetY = Math.cos(Date.now() / 200) * 5; // Adjust the multiplier to change intensity
       // $(".cur-song-img").css("box-shadow", `${offsetX}px ${offsetY}px 10px rgba(${r}, ${g}, ${b}, 0.7)`);
 
-      // Create a rocking shadow effect combined with a standard shadow
-      // const offsetX = Math.sin(Date.now() / 200) * 5; // Adjust the divisor to change speed
-      // const offsetY = Math.cos(Date.now() / 200) * 5; // Adjust the multiplier to change intensity
-      // $(".cur-song-img").css("box-shadow", `
-      //   ${offsetX}px ${offsetY}px 10px rgba(${r}, ${g}, ${b}, 0.7),
-      //   0 5px 15px rgba(0, 0, 0, 0.3)
-      // `);
+      const energy = (lowEnergy + midEnergy + highEnergy) / 3; // Average energy
+      const offsetX = Math.sin(Date.now() / 200) * 5; // Adjust the divisor to change speed
+      const offsetY = Math.cos(Date.now() / 200) * 5; // Adjust the multiplier to change intensity
+      const spread = Math.max(10, Math.min(30, energy * 50)); // Spread based on energy, min 10px, max 30px
+      
+      $(".cur-song-img").css("box-shadow", `
+        ${offsetX}px ${offsetY}px ${spread}px rgba(${r}, ${g}, ${b}, 0.7)
+      `);
 
-      // Create a subtle glow effect
-      const glowIntensity = Math.max(2, Math.min(10, (lowEnergy + midEnergy + highEnergy) * 15));
-      $(".cur-song-img").css({
-        "transition": "filter 0.3s ease",
-        "filter": `drop-shadow(0 0 ${glowIntensity}px rgba(${r}, ${g}, ${b}, 1))`
-      });
     },
   }
 );
