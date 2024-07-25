@@ -22,9 +22,17 @@ const audioMotion = new AudioMotionAnalyzer(
       $("#aaah").css("background-color", `rgb(${r}, ${g}, ${b})`);
 
       // Create a rocking shadow effect
+      // const offsetX = Math.sin(Date.now() / 200) * 5; // Adjust the divisor to change speed
+      // const offsetY = Math.cos(Date.now() / 200) * 5; // Adjust the multiplier to change intensity
+      // $(".cur-song-img").css("box-shadow", `${offsetX}px ${offsetY}px 10px rgba(${r}, ${g}, ${b}, 0.7)`);
+
+      // Create a rocking shadow effect combined with a standard shadow
       const offsetX = Math.sin(Date.now() / 200) * 5; // Adjust the divisor to change speed
       const offsetY = Math.cos(Date.now() / 200) * 5; // Adjust the multiplier to change intensity
-      $(".cur-song-img").css("box-shadow", `${offsetX}px ${offsetY}px 10px rgba(${r}, ${g}, ${b}, 0.7)`);
+      $(".cur-song-img").css("box-shadow", `
+        ${offsetX}px ${offsetY}px 10px rgba(${r}, ${g}, ${b}, 0.7),
+        0 5px 15px rgba(0, 0, 0, 0.3)
+      `);
     },
   }
 );
