@@ -38,7 +38,7 @@ const audioMotion = new AudioMotionAnalyzer(
       const glowIntensity = Math.max(2, Math.min(10, (lowEnergy + midEnergy + highEnergy) * 15));
       $(".cur-song-img").css({
         "transition": "filter 0.3s ease",
-        "filter": `drop-shadow(0 0 ${glowIntensity}px rgba(${r}, ${g}, ${b}, 0.7))`
+        "filter": `drop-shadow(0 0 ${glowIntensity}px rgba(${r}, ${g}, ${b}, 1))`
       });
     },
   }
