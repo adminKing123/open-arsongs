@@ -20,6 +20,7 @@ const audioMotion = new AudioMotionAnalyzer(
       const g = Math.round(midEnergy * 255);
       const b = Math.round(highEnergy * 255);
       $("#aaah").css("background-color", `rgb(${r}, ${g}, ${b})`);
+      $(".cur-song-img").css("background-color", `rgb(${r}, ${g}, ${b})`);
     },
   }
 );
