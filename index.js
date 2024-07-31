@@ -213,7 +213,7 @@ function toggleShowT() {
   } else {
     $("#current-song-details").show()
   }
-  is_t_vis != is_t_vis;
+  is_t_vis = !is_t_vis;
 }
 
 function playAlreadySelectedSong() {
