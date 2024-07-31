@@ -211,7 +211,7 @@ function toggleShowT() {
   if (is_t_vis) {
     $("#current-song-details").hide()
   } else {
-    $("#current-song-details").hide()
+    $("#current-song-details").show()
   }
   is_t_vis != is_t_vis;
 }
