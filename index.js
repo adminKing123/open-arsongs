@@ -124,6 +124,7 @@ $(document).ready(function () {
   audio.addEventListener("ended", handleSongEnded);
 
   $(".option").click(handleOptionClick);
+  $("#hide-thumbnail").click(toggleShowT);
 
   $("#no-a-s-s").click(() => $("#already-selected-song").fadeOut());
   $("#play-a-s-s").click(playAlreadySelectedSong);
@@ -201,16 +202,18 @@ function handleOptionClick(ele) {
   const id = ele.target.id;
   if (id === "next") {
     changeSongBasedOnOption();
-  } else if(id === "hide-thumbnail") {
-    if (is_t_vis) {
-      $("#current-song-details").hide()
-    } else {
-      $("#current-song-details").hide()
-    }
-    is_t_vis != is_t_vis;
   } else {
     changeOption(id);
   }
+}
+
+function toggleShowT() {
+  if (is_t_vis) {
+    $("#current-song-details").hide()
+  } else {
+    $("#current-song-details").hide()
+  }
+  is_t_vis != is_t_vis;
 }
 
 function playAlreadySelectedSong() {
