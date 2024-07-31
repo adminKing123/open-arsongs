@@ -255,6 +255,15 @@ body {
   transition: opacity 300ms ease;
 }
 
+.option2 {
+  opacity: 0;
+  background-color: rgba(94, 94, 255, 0.415);
+  padding: 2px 8px;
+  border-radius: 9px;
+  font-size: 11px;
+  transition: opacity 300ms ease;
+}
+
 .option.active {
   background-color: rgb(94, 94, 255);
 }
