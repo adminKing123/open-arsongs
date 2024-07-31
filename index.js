@@ -1,4 +1,5 @@
 // const API_URI = "http://localhost:3000";
+let is_t_vis = true;
 const API_URI = "https://ionized-songs-book.glitch.me";
 // const API_URI = "https://open-songs-api.onrender.com";
 
@@ -200,6 +201,13 @@ function handleOptionClick(ele) {
   const id = ele.target.id;
   if (id === "next") {
     changeSongBasedOnOption();
+  } else if(id === "hide-thumbnail") {
+    if (is_t_vis) {
+      $("#current-song-details").hide()
+    } else {
+      $("#current-song-details").hide()
+    }
+    is_t_vis != is_t_vis;
   } else {
     changeOption(id);
   }
