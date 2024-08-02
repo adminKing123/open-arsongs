@@ -144,7 +144,7 @@ function changeSong(song, index) {
   $("#player")[0].play();
 
   $("#current-song-details").html(`
-    <div class="cur-song-img" title=`ID: ${song.id}`>
+    <div class="cur-song-img" title="ID: ${song.id}">
         <img src="${API_ENDPOINTS.image(song.album.thumbnail)}" />
       </div>
       <div class="cur-song-name">
