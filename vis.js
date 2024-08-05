@@ -3,7 +3,7 @@ const audioMotion = new AudioMotionAnalyzer(
   document.getElementById("visualizer-container"),
   {
     source: document.getElementById("player"),
-    mode: 1,
+    mode: 4,
     ledBars: true,
     showBgColor: true,
     overlay: true,
