@@ -4,6 +4,7 @@ let is_a_vis = localStorage.getItem("is_a_vis") === null ? false: localStorage.g
 let is_b_vis = localStorage.getItem("is_b_vis") === null ? false: localStorage.getItem("is_b_vis") === '0' ? false: true;
 let is_l_vis = localStorage.getItem("is_l_vis") === null ? false: localStorage.getItem("is_l_vis") === '0' ? false: true;
 let is_v_vis = localStorage.getItem("is_v_vis") === null ? false: localStorage.getItem("is_v_vis") === '0' ? false: true;
+let is_t_cen = localStorage.getItem("is_t_cen") === null ? false: localStorage.getItem("is_t_cen") === '0' ? false: true;
 const API_URI = "https://ionized-songs-book.glitch.me";
 // const API_URI = "https://open-songs-api.onrender.com";
 
@@ -222,6 +223,36 @@ function handleOptionClick(ele) {
   } else {
     changeOption(id);
   }
+}
+
+function toggleCenterT() {
+  if (is_t_cen) {
+    localStorage.setItem("is_t_cen", 1);
+    $("#cen-t").addClass("active");
+    
+    $("#current-song-details").css("display", "");
+    $("#current-song-details").css("justify-content", "");
+    $("#current-song-details").css("align-items", "");
+    $("#current-song-details").css("top", "28px");
+    $("#current-song-details").css("right", "28px");
+    $("#current-song-details").css("left", "");
+    $("#current-song-details").css("width", "");
+    $("#current-song-details").css("height", "");
+    
+  } else {
+    localStorage.setItem("is_t_cen", 0);
+    $("#cen-t").removeClass("active");
+    // center here
+    $("#current-song-details").css("display", "flex");
+    $("#current-song-details").css("justify-content", "center");
+    $("#current-song-details").css("align-items", "center");
+    $("#current-song-details").css("top", "0");
+    $("#current-song-details").css("left", "0");
+    $("#current-song-details").css("width", "100vw");
+    $("#current-song-details").css("height", "100vh");
+    
+  }
+  is_t_cen = !is_t_cen;
 }
 
 function toggleShowT() {
