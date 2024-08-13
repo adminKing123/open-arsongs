@@ -4,7 +4,7 @@ let is_a_vis = localStorage.getItem("is_a_vis") === null ? false: localStorage.g
 let is_b_vis = localStorage.getItem("is_b_vis") === null ? false: localStorage.getItem("is_b_vis") === '0' ? false: true;
 let is_l_vis = localStorage.getItem("is_l_vis") === null ? false: localStorage.getItem("is_l_vis") === '0' ? false: true;
 let is_v_vis = localStorage.getItem("is_v_vis") === null ? false: localStorage.getItem("is_v_vis") === '0' ? false: true;
-let is_t_cen = localStorage.getItem("is_t_cen") === null ? false: localStorage.getItem("is_t_cen") === '0' ? false: true;
+let is_t_cen = localStorage.getItem("is_t_cen") === null ? true: localStorage.getItem("is_t_cen") === '0' ? false: true;
 const API_URI = "https://ionized-songs-book.glitch.me";
 // const API_URI = "https://open-songs-api.onrender.com";
 
@@ -240,6 +240,7 @@ function toggleCenterT() {
     $("#current-song-details").css("left", "");
     $("#current-song-details").css("width", "");
     $("#current-song-details").css("height", "");
+    $("#current-song-details").css("pointer-events", "");
     
   } else {
     localStorage.setItem("is_t_cen", 0);
@@ -252,6 +253,7 @@ function toggleCenterT() {
     $("#current-song-details").css("left", "0");
     $("#current-song-details").css("width", "100vw");
     $("#current-song-details").css("height", "100vh");
+    $("#current-song-details").css("pointer-events", "none");
     
   }
   is_t_cen = !is_t_cen;
