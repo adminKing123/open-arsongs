@@ -36,15 +36,8 @@ const audioMotion = new AudioMotionAnalyzer(
       $("#lin-border").css({
         "border-width": `${borderWidth}px`,
         "border-style": "solid",
-        "border-image": `
-          linear-gradient(
-            ${Date.now() / gradientSpeed}deg,
-            rgba(${r}, ${g}, ${b}, 0.8),
-            rgba(${b}, ${r}, ${g}, 0.8),
-            rgba(${g}, ${b}, ${r}, 0.8)
-          ) 1
-        `,
-        "animation": `rotate ${20 - gradientSpeed}s linear infinite`
+        "border-image": "linear-gradient(45deg, #ff9a9e, #fad0c4, #ffecd2) 1",
+        "animation": `rotate ${30 - gradientSpeed}s linear infinite`
       });
     },
   }
