@@ -364,12 +364,3 @@ body {
 .lyric-line.adjacent {
   color: #666;
 }
-
-@keyframes rotate {
-  0% {
-    border-image: linear-gradient(0deg, #ff9a9e, #fad0c4, #ffecd2) 1;
-  }
-  100% {
-    border-image: linear-gradient(360deg, #ff9a9e, #fad0c4, #ffecd2) 1;
-  }
-}
