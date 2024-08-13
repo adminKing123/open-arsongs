@@ -33,7 +33,7 @@ const audioMotion = new AudioMotionAnalyzer(
       const gradientAngle = Math.round(energy * 360); // Gradient angle based on energy
 
       $("#lin-border").css({
-        "border-image": `linear-gradient(${gradientAngle}deg, #ff9a9e, #fad0c4, #ffecd2) 1`
+        "border-image": `linear-gradient(${gradientAngle}deg, red, green, blue) 1`
       });
     },
   }
