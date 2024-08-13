@@ -30,7 +30,7 @@ const audioMotion = new AudioMotionAnalyzer(
 
       
       // Border gradient effect for lin-border
-      const gradientAngle = Math.round(energy * 360); // Gradient angle based on energy
+      const gradientAngle = Math.round(highEnergy * 360) % 360; // Gradient angle based on high energy, clamped to 0-359
 
       $("#lin-border").css({
         "border-image": `linear-gradient(${gradientAngle}deg, red, green, blue) 1`
