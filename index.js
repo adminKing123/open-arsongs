@@ -134,6 +134,7 @@ $(document).ready(function () {
   $("#hide-b").click(toggleShowB);
   $("#hide-l").click(toggleShowL);
   $("#hide-v").click(toggleShowV);
+  $("#cen-t").click(toggleCenterT);
 
   $("#no-a-s-s").click(() => $("#already-selected-song").fadeOut());
   $("#play-a-s-s").click(playAlreadySelectedSong);
@@ -143,6 +144,7 @@ $(document).ready(function () {
   toggleShowB();
   toggleShowL();
   toggleShowV();
+  toggleCenterT();
 });
 
 const storage = {
