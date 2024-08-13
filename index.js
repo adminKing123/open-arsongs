@@ -142,6 +142,7 @@ $(document).ready(function () {
   $("#no-a-s-s").click(() => $("#already-selected-song").fadeOut());
   $("#play-a-s-s").click(playAlreadySelectedSong);
 
+  blurToggleDBT();
   toggleShowT();
   toggleShowA();
   toggleShowB();
