@@ -2,6 +2,8 @@
 let is_t_vis = true;
 let is_a_vis = true;
 let is_b_vis = true;
+let is_l_vis = true;
+let is_v_vis = true;
 const API_URI = "https://ionized-songs-book.glitch.me";
 // const API_URI = "https://open-songs-api.onrender.com";
 
@@ -129,6 +131,8 @@ $(document).ready(function () {
   $("#hide-thumbnail").click(toggleShowT);
   $("#hide-a").click(toggleShowA);
   $("#hide-b").click(toggleShowB);
+  $("#hide-l").click(toggleShowL);
+  $("#hide-v").click(toggleShowV);
 
   $("#no-a-s-s").click(() => $("#already-selected-song").fadeOut());
   $("#play-a-s-s").click(playAlreadySelectedSong);
@@ -236,6 +240,24 @@ function toggleShowB() {
     $("#lin-border").show()
   }
   is_b_vis = !is_b_vis;
+}
+
+function toggleShowL() {
+  if (is_l_vis) {
+    $("#lyric-display").hide()
+  } else {
+    $("#lyric-display").show()
+  }
+  is_l_vis = !is_l_vis;
+}
+
+function toggleShowV() {
+  if (is_v_vis) {
+    $("#visualizer-container").hide()
+  } else {
+    $("#visualizer-container").show()
+  }
+  is_v_vis = !is_v_vis;
 }
 
 function playAlreadySelectedSong() {
