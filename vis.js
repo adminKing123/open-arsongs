@@ -38,7 +38,7 @@ const audioMotion = new AudioMotionAnalyzer(
       const gradientAngle = Math.round(currentAngle) % 360;
 
       $("#lin-border").css({
-        "border-image": `linear-gradient(${gradientAngle}deg, red, green, blue) 1`
+        "border-color": `rgba(0, ${g}, ${b}, 0.7)`
       });
     },
   }
