@@ -217,8 +217,10 @@ function handleOptionClick(ele) {
 
 function toggleShowT() {
   if (is_t_vis) {
+    $("#hide-thumbnail").addClass("active");
     $("#current-song-details").hide()
   } else {
+    $("#hide-thumbnail").removeClass("active");
     $("#current-song-details").show()
   }
   is_t_vis = !is_t_vis;
@@ -226,8 +228,10 @@ function toggleShowT() {
 
 function toggleShowA() {
   if (is_a_vis) {
+    $("#hide-a").addClass("active");
     $("#aaah").hide()
   } else {
+    $("#hide-a").removeClass("active");
     $("#aaah").show()
   }
   is_a_vis = !is_a_vis;
@@ -235,8 +239,10 @@ function toggleShowA() {
 
 function toggleShowB() {
   if (is_b_vis) {
+    $("#hide-b").addClass("active");
     $("#lin-border").hide()
   } else {
+    $("#hide-b").removeClass("active");
     $("#lin-border").show()
   }
   is_b_vis = !is_b_vis;
@@ -244,8 +250,10 @@ function toggleShowB() {
 
 function toggleShowL() {
   if (is_l_vis) {
+    $("#hide-l").addClass("active");
     $("#lyric-display").hide()
   } else {
+    $("#hide-l").removeClass("active");
     $("#lyric-display").show()
   }
   is_l_vis = !is_l_vis;
@@ -253,8 +261,10 @@ function toggleShowL() {
 
 function toggleShowV() {
   if (is_v_vis) {
+    $("#hide-v").addClass("active");
     $("#visualizer-container").hide()
   } else {
+    $("#hide-v").removeClass("active");
     $("#visualizer-container").show()
   }
   is_v_vis = !is_v_vis;
