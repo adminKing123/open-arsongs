@@ -265,8 +265,12 @@ body {
   transition: opacity 300ms ease;
 }
 
-.option.active, .option2.active {
+.option.active {
   background-color: rgb(94, 94, 255);
+}
+
+.option2.active {
+  background-color: red;
 }
 
 #already-selected-song {
