@@ -30,14 +30,10 @@ const audioMotion = new AudioMotionAnalyzer(
 
       
       // Border gradient effect for lin-border
-      const borderWidth = Math.max(4, Math.min(10, energy * 20)); // Border width based on energy
-      const gradientSpeed = Math.max(2, Math.min(10, energy * 20)); // Animation speed based on energy
+      const gradientAngle = Math.round(energy * 360); // Gradient angle based on energy
 
       $("#lin-border").css({
-        "border-width": `${borderWidth}px`,
-        "border-style": "solid",
-        "border-image": "linear-gradient(45deg, #ff9a9e, #fad0c4, #ffecd2) 1",
-        "animation": `rotate ${30 - gradientSpeed}s linear infinite`
+        "border-image": `linear-gradient(${gradientAngle}deg, #ff9a9e, #fad0c4, #ffecd2) 1`
       });
     },
   }
