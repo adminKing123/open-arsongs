@@ -1,9 +1,9 @@
 // const API_URI = "http://localhost:3000";
-let is_t_vis = localStorage.getItem("is_t_vis") === null ? true: localStorage.getItem("is_t_vis") === '0' ? false: true;
-let is_a_vis = localStorage.getItem("is_a_vis") === null ? true: localStorage.getItem("is_a_vis") === '0' ? false: true;
-let is_b_vis = localStorage.getItem("is_b_vis") === null ? true: localStorage.getItem("is_b_vis") === '0' ? false: true;
-let is_l_vis = localStorage.getItem("is_l_vis") === null ? true: localStorage.getItem("is_l_vis") === '0' ? false: true;
-let is_v_vis = localStorage.getItem("is_v_vis") === null ? true: localStorage.getItem("is_v_vis") === '0' ? false: true;
+let is_t_vis = localStorage.getItem("is_t_vis") === null ? false: localStorage.getItem("is_t_vis") === '0' ? true: false;
+let is_a_vis = localStorage.getItem("is_a_vis") === null ? false: localStorage.getItem("is_a_vis") === '0' ? true: false;
+let is_b_vis = localStorage.getItem("is_b_vis") === null ? false: localStorage.getItem("is_b_vis") === '0' ? true: false;
+let is_l_vis = localStorage.getItem("is_l_vis") === null ? false: localStorage.getItem("is_l_vis") === '0' ? true: false;
+let is_v_vis = localStorage.getItem("is_v_vis") === null ? false: localStorage.getItem("is_v_vis") === '0' ? true: false;
 const API_URI = "https://ionized-songs-book.glitch.me";
 // const API_URI = "https://open-songs-api.onrender.com";
 
