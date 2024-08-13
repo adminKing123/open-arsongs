@@ -1,4 +1,7 @@
 import AudioMotionAnalyzer from "https://cdn.skypack.dev/audiomotion-analyzer?min";
+
+let currentAngle = 0;
+
 const audioMotion = new AudioMotionAnalyzer(
   document.getElementById("visualizer-container"),
   {
