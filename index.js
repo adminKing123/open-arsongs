@@ -245,7 +245,7 @@ function toggleCenterT() {
     $("#current-song-details").css("height", "");
     $("#current-song-details").css("pointer-events", "");
 
-    is_blur_dbt = true;
+    is_blur_dbt = false;
     blurToggleDBT();
   } else {
     localStorage.setItem("is_t_cen", 0);
