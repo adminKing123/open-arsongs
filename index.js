@@ -1,9 +1,9 @@
 // const API_URI = "http://localhost:3000";
-let is_t_vis = true;
-let is_a_vis = true;
-let is_b_vis = true;
-let is_l_vis = true;
-let is_v_vis = true;
+let is_t_vis = localStorage.getItem("is_t_vis") === null ? true: localStorage.getItem("is_t_vis") === '0' ? false: true;
+let is_a_vis = localStorage.getItem("is_a_vis") === null ? true: localStorage.getItem("is_a_vis") === '0' ? false: true;
+let is_b_vis = localStorage.getItem("is_b_vis") === null ? true: localStorage.getItem("is_b_vis") === '0' ? false: true;
+let is_l_vis = localStorage.getItem("is_l_vis") === null ? true: localStorage.getItem("is_l_vis") === '0' ? false: true;
+let is_v_vis = localStorage.getItem("is_v_vis") === null ? true: localStorage.getItem("is_v_vis") === '0' ? false: true;
 const API_URI = "https://ionized-songs-book.glitch.me";
 // const API_URI = "https://open-songs-api.onrender.com";
 
@@ -136,6 +136,12 @@ $(document).ready(function () {
 
   $("#no-a-s-s").click(() => $("#already-selected-song").fadeOut());
   $("#play-a-s-s").click(playAlreadySelectedSong);
+
+  toggleShowT();
+  toggleShowA();
+  toggleShowB();
+  toggleShowL();
+  toggleShowV();
 });
 
 const storage = {
@@ -217,9 +223,11 @@ function handleOptionClick(ele) {
 
 function toggleShowT() {
   if (is_t_vis) {
+    localStorage.setItem("is_t_vis", 1);
     $("#hide-thumbnail").addClass("active");
     $("#current-song-details").hide()
   } else {
+    localStorage.setItem("is_t_vis", 0);
     $("#hide-thumbnail").removeClass("active");
     $("#current-song-details").show()
   }
@@ -228,9 +236,11 @@ function toggleShowT() {
 
 function toggleShowA() {
   if (is_a_vis) {
+    localStorage.setItem("is_a_vis", 1);
     $("#hide-a").addClass("active");
     $("#aaah").hide()
   } else {
+    localStorage.setItem("is_a_vis", 0);
     $("#hide-a").removeClass("active");
     $("#aaah").show()
   }
@@ -239,9 +249,11 @@ function toggleShowA() {
 
 function toggleShowB() {
   if (is_b_vis) {
+    localStorage.setItem("is_b_vis", 1);
     $("#hide-b").addClass("active");
     $("#lin-border").hide()
   } else {
+    localStorage.setItem("is_b_vis", 0);
     $("#hide-b").removeClass("active");
     $("#lin-border").show()
   }
@@ -250,9 +262,11 @@ function toggleShowB() {
 
 function toggleShowL() {
   if (is_l_vis) {
+    localStorage.setItem("is_l_vis", 1);
     $("#hide-l").addClass("active");
     $("#lyric-display").hide()
   } else {
+    localStorage.setItem("is_l_vis", 0);
     $("#hide-l").removeClass("active");
     $("#lyric-display").show()
   }
@@ -261,9 +275,11 @@ function toggleShowL() {
 
 function toggleShowV() {
   if (is_v_vis) {
+    localStorage.setItem("is_v_vis", 1);
     $("#hide-v").addClass("active");
     $("#visualizer-container").hide()
   } else {
+    localStorage.setItem("is_v_vis", 0);
     $("#hide-v").removeClass("active");
     $("#visualizer-container").show()
   }
