@@ -27,6 +27,25 @@ const audioMotion = new AudioMotionAnalyzer(
       $(".cur-song-img").css("box-shadow", `
         0px 0px ${spread}px rgba(${r}, ${g}, ${b}, 0.7)
       `);
+
+      
+      // Border gradient effect for lin-border
+      const borderWidth = Math.max(4, Math.min(10, energy * 20)); // Border width based on energy
+      const gradientSpeed = Math.max(2, Math.min(10, energy * 20)); // Animation speed based on energy
+
+      $("#lin-border").css({
+        "border-width": `${borderWidth}px`,
+        "border-style": "solid",
+        "border-image": `
+          linear-gradient(
+            ${Date.now() / gradientSpeed}deg,
+            rgba(${r}, ${g}, ${b}, 0.8),
+            rgba(${b}, ${r}, ${g}, 0.8),
+            rgba(${g}, ${b}, ${r}, 0.8)
+          ) 1
+        `,
+        "animation": `rotate ${20 - gradientSpeed}s linear infinite`
+      });
     },
   }
 );
