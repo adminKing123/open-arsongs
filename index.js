@@ -5,6 +5,8 @@ let is_b_vis = localStorage.getItem("is_b_vis") === null ? false: localStorage.g
 let is_l_vis = localStorage.getItem("is_l_vis") === null ? false: localStorage.getItem("is_l_vis") === '0' ? false: true;
 let is_v_vis = localStorage.getItem("is_v_vis") === null ? false: localStorage.getItem("is_v_vis") === '0' ? false: true;
 let is_t_cen = localStorage.getItem("is_t_cen") === null ? true: localStorage.getItem("is_t_cen") === '0' ? false: true;
+let is_blur_dbt = localStorage.getItem("is_blur_dbt") === null ? false: localStorage.getItem("is_blur_dbt") === '0' ? false: true;
+
 const API_URI = "https://ionized-songs-book.glitch.me";
 // const API_URI = "https://open-songs-api.onrender.com";
 
@@ -135,6 +137,7 @@ $(document).ready(function () {
   $("#hide-l").click(toggleShowL);
   $("#hide-v").click(toggleShowV);
   $("#cen-t").click(toggleCenterT);
+  $("#blur-bdt").click(blurToggleDBT);
 
   $("#no-a-s-s").click(() => $("#already-selected-song").fadeOut());
   $("#play-a-s-s").click(playAlreadySelectedSong);
@@ -241,7 +244,9 @@ function toggleCenterT() {
     $("#current-song-details").css("width", "");
     $("#current-song-details").css("height", "");
     $("#current-song-details").css("pointer-events", "");
-    
+
+    is_blur_dbt = true;
+    blurToggleDBT();
   } else {
     localStorage.setItem("is_t_cen", 0);
     $("#cen-t").removeClass("active");
@@ -271,6 +276,21 @@ function toggleShowT() {
   }
   is_t_vis = !is_t_vis;
 }
+
+function blurToggleDBT() {
+  if (is_blur_dbt) {
+    localStorage.setItem("is_blur_dbt", 1);
+    $("#blur-bdt").addClass("active");
+    $("#current-song-details").css("backdrop-filter", "blur(3px)");
+  } else {
+    localStorage.setItem("is_blur_dbt", 0);
+    $("#blur-bdt").removeClass("active");
+    $("#current-song-details").css("backdrop-filter", "");
+  }
+  is_blur_dbt = !is_blur_dbt;
+}
+
+
 
 function toggleShowA() {
   if (is_a_vis) {
