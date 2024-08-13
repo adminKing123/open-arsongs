@@ -233,6 +233,7 @@ body {
 }
 
 #options {
+  z-index: 1000;
   opacity: 0;
   color: white;
   position: absolute;
@@ -345,6 +346,8 @@ body {
 
 /* lyrics */
 #lyric-display {
+  z-index: 1000;
+  position: absolute;
   pointer-events: none;
   width: 100vw;
   font-size: 18px;
